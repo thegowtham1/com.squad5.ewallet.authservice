@@ -1,6 +1,6 @@
 package com.squad5.ewallet.authservice.service;
 
-import com.squad5.ewallet.authservice.config.JwtTokenUtil;
+import com.squad5.ewallet.authservice.util.JwtTokenUtil;
 import com.squad5.ewallet.authservice.dto.AuthResponse;
 import com.squad5.ewallet.authservice.dto.RegisterRequest;
 import com.squad5.ewallet.authservice.entity.Role;
@@ -9,8 +9,6 @@ import com.squad5.ewallet.authservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class AuthService {

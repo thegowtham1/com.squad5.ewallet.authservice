@@ -1,7 +1,7 @@
 package com.squad5.ewallet.authservice.controller;
 
-import com.squad5.ewallet.authservice.config.JwtTokenUtil;   // your existing util
-import com.squad5.ewallet.authservice.dto.WalletDto;
+import com.squad5.ewallet.authservice.util.JwtTokenUtil;   // your existing util
+import com.squad5.ewallet.authservice.dto.WalletResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
@@ -27,10 +27,6 @@ public class WalletProxyController {
         this.walletBaseUrl = walletBaseUrl;
     }
 
-    /**
-     * Proxy endpoint: validates token locally and forwards request to wallet service.
-     * Example: GET /api/wallet/userdetails?userId=1
-     */
     @GetMapping("/userdetails")
     public ResponseEntity<?> getUserWallet(@RequestParam("userId") Long userId,
                                            @RequestHeader(value = "Authorization", required = false) String authorizationHeader) {
@@ -71,7 +67,7 @@ public class WalletProxyController {
 
             // 3. Forward request to wallet service, passing Authorization header
             String forwardUri = "/api/wallet/userdetails?userId=" + userId;
-            WalletDto wallet = webClient.get()
+            WalletResponse wallet = webClient.get()
                     .uri(forwardUri)
                     .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                     .accept(MediaType.APPLICATION_JSON)
@@ -88,7 +84,7 @@ public class WalletProxyController {
                         return Mono.error(new ResponseStatusException(HttpStatus.BAD_GATEWAY, "Upstream 4xx"));
                     })
                     .onStatus(org.springframework.http.HttpStatusCode::is5xxServerError, resp -> Mono.error(new ResponseStatusException(HttpStatus.BAD_GATEWAY, "Wallet service error")))
-                    .bodyToMono(WalletDto.class)
+                    .bodyToMono(WalletResponse.class)
                     .block();
 
             return ResponseEntity.ok(wallet);

@@ -1,6 +1,6 @@
 package com.squad5.ewallet.authservice.filter;
 
-import com.squad5.ewallet.authservice.config.JwtTokenUtil;
+import com.squad5.ewallet.authservice.util.JwtTokenUtil;
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

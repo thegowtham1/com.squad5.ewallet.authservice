@@ -24,7 +24,6 @@ public class GlobalExceptionHandler {
 
         Map<String, Object> response = new HashMap<>();
         response.put("status", "ERROR");
-//        response.put("message", ex.getMessage());
         response.put("timestamp", Instant.now().toString());
         response.put("type", ex.getClass().getSimpleName());
 

@@ -1,4 +1,4 @@
-package com.squad5.ewallet.authservice.util;
+package com.squad5.ewallet.authservice.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

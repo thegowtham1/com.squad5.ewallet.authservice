@@ -1,4 +1,4 @@
-package com.squad5.ewallet.authservice.config;
+package com.squad5.ewallet.authservice.util;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;

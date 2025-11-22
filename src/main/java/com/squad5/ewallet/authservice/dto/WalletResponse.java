@@ -1,6 +1,6 @@
 package com.squad5.ewallet.authservice.dto;
 
-public class WalletDto {
+public class WalletResponse {
     private Long userId;
     private String accountNumber;
     private Double balance;

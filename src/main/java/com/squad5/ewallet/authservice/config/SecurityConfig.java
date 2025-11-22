@@ -1,6 +1,7 @@
 package com.squad5.ewallet.authservice.config;
 
 import com.squad5.ewallet.authservice.filter.JwtAuthenticationFilter;
+import com.squad5.ewallet.authservice.util.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
