@@ -1,5 +1,6 @@
 package com.squad5.ewallet.authservice.service;
 
+import com.squad5.ewallet.authservice.exception.InvalidCredentialsException;
 import com.squad5.ewallet.authservice.util.JwtTokenUtil;
 import com.squad5.ewallet.authservice.dto.AuthResponse;
 import com.squad5.ewallet.authservice.dto.RegisterRequest;
@@ -33,13 +34,13 @@ public class AuthService {
 
         var maybe = userRepository.findByUsername(username);
         if (maybe.isEmpty()) {
-            throw new RuntimeException("Invalid credentials");
+            throw new InvalidCredentialsException("Invalid User");
         }
 
         var user = maybe.get();
 
         if (!passwordEncoder.matches(password, user.getPasswordHash())) {
-            throw new RuntimeException("Invalid credentials");
+            throw new InvalidCredentialsException("Invalid credentials");
         }
 
         String token = jwtTokenUtil.generateToken(user.getId(), user.getRole().name());

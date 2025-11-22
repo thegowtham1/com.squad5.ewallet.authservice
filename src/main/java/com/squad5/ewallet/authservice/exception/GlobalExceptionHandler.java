@@ -74,6 +74,18 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response, ex.getStatusCode());
     }
 
+    @ExceptionHandler(InvalidCredentialsException.class)
+    public ResponseEntity<Map<String, Object>> handleWalletNotFound(InvalidCredentialsException ex) {
+        logger.error("Invalid Login: ", ex);
+        Map<String, Object> response = new HashMap<>();
+        response.put("status", "FAIL");
+        response.put("message", ex.getMessage());
+        response.put("timestamp", Instant.now().toString());
+
+        logger.info("Invalid Login: ResponseSent - {}, Exception",response, ex);
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
 }
 
 
